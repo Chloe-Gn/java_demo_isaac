@@ -39,6 +39,9 @@ public class DemoController {
 
         // 2 : En Factory à la main (pas singleton)
         // Pas de singleton car le factory actuellement reinstancie à chaque fois le manager
+        // AlimentManager alimentManager = FactoryManager.getAlimentManagerNoSingleton();
+
+        // 3 : En Factory à la main et Singleton
         AlimentManager alimentManager = FactoryManager.getAlimentManager();
 
         // Envoyer la liste d'aliments dans le Modèle
