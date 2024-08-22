@@ -1,5 +1,6 @@
 package eni.demo.demo.module4;
 
+import eni.demo.demo.Personne;
 import eni.demo.demo.module4.bll.AlimentManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,6 +47,12 @@ public class DemoController {
     public String showAliment(@PathVariable("id") long id, Model model){
         // Récupérer l'aliment via la manager avec comme paramètre l'id provenant de la requête (URL)
         Aliment aliment = alimentManager.getById(id);
+
+        // Tester si l'aliment n'existe
+        if (aliment == null){
+            // Afficher la page d'erreur qui s'appelle aliment-not-found
+            return "aliment-not-found";
+        }
 
         // Envoyer l'aliment trouvé dans la vue (dans le modèle)
         model.addAttribute("aliment", aliment);

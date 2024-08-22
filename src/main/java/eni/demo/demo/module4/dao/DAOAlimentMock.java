@@ -41,7 +41,7 @@ public class DAOAlimentMock implements IDAOAliment {
         // .filter => retourne les elements filtrés (qui respecte la condition)
         // .findFirst => car je veux forcer à avoir/retourner qu'un seul element
         // .get() => comme c'est nullable (Optionnal) je pars du principe qu'il n'est pas null pour l'instant
-        Aliment alimentToFound = aliments.stream().filter(aliment -> aliment.id == id).findFirst().get();
+        Aliment alimentToFound = aliments.stream().filter(aliment -> aliment.id == id).findFirst().orElse(null);
 
         return alimentToFound;
     }
