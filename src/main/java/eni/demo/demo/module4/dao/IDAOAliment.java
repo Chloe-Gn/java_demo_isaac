@@ -13,4 +13,6 @@ import java.util.List;
 public interface IDAOAliment {
 
     List<Aliment> selectAliments();
+
+    Aliment selectAlimentById(long id);
 }

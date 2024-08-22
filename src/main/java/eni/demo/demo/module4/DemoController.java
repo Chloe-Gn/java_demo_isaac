@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class DemoController {
@@ -39,6 +40,18 @@ public class DemoController {
 
         // Afficher la page
         return "aliments-page";
+    }
+
+    @GetMapping("show-aliment/{id}")
+    public String showAliment(@PathVariable("id") long id, Model model){
+        // Récupérer l'aliment via la manager avec comme paramètre l'id provenant de la requête (URL)
+        Aliment aliment = alimentManager.getById(id);
+
+        // Envoyer l'aliment trouvé dans la vue (dans le modèle)
+        model.addAttribute("aliment", aliment);
+
+        // Afficher la page detail aliment
+        return "detail-aliment-page";
     }
 
 }

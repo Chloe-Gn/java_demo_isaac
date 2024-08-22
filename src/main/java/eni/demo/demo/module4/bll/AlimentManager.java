@@ -23,4 +23,11 @@ public class AlimentManager {
 
         return aliments;
     }
+
+    public Aliment getById(long id) {
+        // récupérer un aliment via la DAO
+        Aliment aliment = daoAliment.selectAlimentById(id);
+
+        return aliment;
+    }
 }

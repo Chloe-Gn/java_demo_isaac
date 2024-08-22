@@ -14,4 +14,9 @@ public class DAOAlimentMySQL implements IDAOAliment {
     public List<Aliment> selectAliments() {
         return List.of();
     }
+
+    @Override
+    public Aliment selectAlimentById(long id) {
+        return null;
+    }
 }
