@@ -1,6 +1,5 @@
 package eni.demo.demo.module4;
 
-import eni.demo.demo.Personne;
 import eni.demo.demo.module4.bll.AlimentManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,7 +39,9 @@ public class DemoController {
         model.addAttribute("aliments", alimentManager.getAliments());
 
         // Afficher la page
-        return "aliments-page";
+        // return "aliments-page";
+        // return "v2/aliments-page-v2";
+        return "v3/aliments-page-v3";
     }
 
     @GetMapping("show-aliment/{id}")
