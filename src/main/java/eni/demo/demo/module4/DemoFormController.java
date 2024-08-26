@@ -29,6 +29,10 @@ public class DemoFormController {
      */
     @PostMapping("aliment-form")
     public String alimentForm(@ModelAttribute Aliment aliment) {
+
+        // Todo : On sauvegarde l'aliment dans la BDD
+        System.out.println(String.format("L'aliment %s a été sauvegardé", aliment.name));
+
         // Afficher la page formulaire
         return "form/form-aliment-page";
     }
