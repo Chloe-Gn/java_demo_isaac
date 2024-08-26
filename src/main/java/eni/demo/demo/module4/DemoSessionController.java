@@ -22,6 +22,7 @@ public class DemoSessionController {
                 "Cassoulet oeuf");
 
         // Envoyer le panier dans le front (envoyer dans le context de la réponse)
+        // Si "basket" est dans @SessionAttributes alors il sera en meme temps en session grace au model.addAttribute
         model.addAttribute("basket", basket);
 
         // affiche la page (qui affiche le panier
