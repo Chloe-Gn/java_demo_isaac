@@ -7,6 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class DemoController {
 
@@ -62,4 +65,27 @@ public class DemoController {
         return "detail-aliment-page";
     }
 
+    @GetMapping("demo-debug")
+    public String showDemoDebug(){
+
+        // Demo 1
+        /*
+        String pseudo1 = "Isaac";
+        String pseudo2 = "SacréSacré";
+
+        pseudo1 = pseudo2;
+
+        pseudo1 = "Pas 16h30. :'( sniff. Bilan module va piquer pour la peine";
+        */
+
+        Aliment a1 = new Aliment(1L, "Chocolatine");
+        Aliment a2 = new Aliment(2L, "Pain au chocolat");
+
+        a1 = a2;
+
+        a1.name = "Pizza Ananas Nutella Crevette";
+
+        // Push en base des aliments
+        return "todo";
+    }
 }
