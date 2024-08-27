@@ -1,8 +1,14 @@
 package eni.demo.demo.module4;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public class Aliment {
 
     public long id;
+
+    @NotBlank( message = "Le titre doit être renseigné")
+    @Size(min=2, max=250, message = "Doit avoir au moins 2 caractères")
     public String name;
 
     public Aliment() {
