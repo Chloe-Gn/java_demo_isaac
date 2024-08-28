@@ -1,18 +1,42 @@
 package eni.demo.demo.module4.dao;
 
 import eni.demo.demo.module4.Aliment;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 @Profile("mysql")
 @Component
 public class DAOAlimentMySQL implements IDAOAliment {
 
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
+    /**
+     * Le code qui permet de savoir comment convertir/mapper un resultat en SQL en Objet/Classe
+     * Comment mapper un resultat SQL en Aliment
+     */
+    static final RowMapper<Aliment> ALIMENT_ROW_MAPPER = new RowMapper<Aliment>() {
+        @Override
+        public Aliment mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Aliment aliment = new Aliment();
+
+            aliment.id = rs.getInt("id");
+            aliment.name = rs.getString("name");
+
+            return aliment;
+        }
+    };
+
     @Override
     public List<Aliment> selectAliments() {
-        return List.of();
+        return jdbcTemplate.query("SELECT * FROM aliment", ALIMENT_ROW_MAPPER);
     }
 
     @Override
