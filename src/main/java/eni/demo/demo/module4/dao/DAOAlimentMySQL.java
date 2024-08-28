@@ -54,4 +54,18 @@ public class DAOAlimentMySQL implements IDAOAliment {
         // Retourner le premier element
         return aliments.get(0);
     }
+
+    @Override
+    public void save(Aliment aliment) {
+        // Tester si il existe en base, SI OUI => Update SINON => Insert
+        if (selectAlimentById(aliment.id) != null) {
+            // Update en base un aliment
+            jdbcTemplate.update("UPDATE aliment SET name = ? WHERE id = ?", aliment.name, aliment.id);
+
+            // PS : Return = Arreter la fonction
+            return;
+        }
+        // Insérer en base un aliment
+        jdbcTemplate.update("INSERT INTO aliment(id, name) VALUES (?, ?)", aliment.id, aliment.name);
+    }
 }

@@ -1,6 +1,8 @@
 package eni.demo.demo.module4;
 
+import eni.demo.demo.module4.bll.AlimentManager;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.system.SystemProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class DemoFormController {
+
+    @Autowired
+    AlimentManager alimentManager;
 
     @GetMapping("show-aliment-form")
     public String showAlimentForm(Model model) {
@@ -37,8 +42,8 @@ public class DemoFormController {
             System.out.println("Erreur de contrôle surface");
         }
 
-        // Todo : On sauvegarde l'aliment dans la BDD
-        System.out.println(String.format("L'aliment %s a été sauvegardé", aliment.name));
+        // On sauvegarde l'aliment dans la BDD
+        alimentManager.saveAliment(aliment);
 
         // Afficher la page formulaire
         return "form/form-aliment-page";

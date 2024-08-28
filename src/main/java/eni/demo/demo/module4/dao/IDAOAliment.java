@@ -15,4 +15,6 @@ public interface IDAOAliment {
     List<Aliment> selectAliments();
 
     Aliment selectAlimentById(long id);
+
+    void save(Aliment aliment);
 }

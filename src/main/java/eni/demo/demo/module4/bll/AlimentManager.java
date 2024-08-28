@@ -30,4 +30,12 @@ public class AlimentManager {
 
         return aliment;
     }
+
+    /**
+     * Appellera la DAO pour sauvegarder un Aliment
+     * @param aliment
+     */
+    public void saveAliment(Aliment aliment) {
+        daoAliment.save(aliment);
+    }
 }

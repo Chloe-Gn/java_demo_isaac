@@ -45,4 +45,9 @@ public class DAOAlimentMock implements IDAOAliment {
 
         return alimentToFound;
     }
+
+    @Override
+    public void save(Aliment aliment) {
+        // TODO
+    }
 }
