@@ -36,11 +36,22 @@ public class DAOAlimentMySQL implements IDAOAliment {
 
     @Override
     public List<Aliment> selectAliments() {
+        // Execute la requete pour trouver tout les elements d'une table
         return jdbcTemplate.query("SELECT * FROM aliment", ALIMENT_ROW_MAPPER);
     }
 
     @Override
     public Aliment selectAlimentById(long id) {
-        return null;
+
+        // Execute la requete pour trouver les elements d'une table selon la clause
+        List<Aliment> aliments = jdbcTemplate.query("SELECT * FROM aliment WHERE id = ?", ALIMENT_ROW_MAPPER, id);
+
+        // Si on trouve aucun element on retourne null
+        if (aliments.size() == 0) {
+            return null;
+        }
+
+        // Retourner le premier element
+        return aliments.get(0);
     }
 }
