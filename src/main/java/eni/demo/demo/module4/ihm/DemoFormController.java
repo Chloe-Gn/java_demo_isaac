@@ -19,7 +19,6 @@ public class DemoFormController {
 
     @GetMapping("show-aliment-form")
     public String showAlimentForm(Model model) {
-
         // Préparer ce que tu va envoyer dans le formulaire par défaut
         Aliment aliment = new Aliment(-1L, "");
 
