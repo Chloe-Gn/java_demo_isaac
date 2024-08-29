@@ -1,6 +1,8 @@
 package eni.demo.demo.module4;
 
 import eni.demo.demo.module4.bll.AlimentManager;
+import eni.demo.demo.module4.bll.AlimentManagerV2;
+import eni.demo.demo.module4.bll.EniManagerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,9 @@ public class DemoController {
 
     @Autowired
     AlimentManager alimentManager;
+
+    @Autowired
+    AlimentManagerV2 alimentManagerV2;
 
     @GetMapping("chocolatine")
     public String chocolatine() {
@@ -38,8 +43,14 @@ public class DemoController {
 
     @GetMapping("show-aliments")
     public String showAliments(Model model){
+        // V1 : Envoyer la liste d'aliments dans le Modèle
+        //model.addAttribute("aliments", alimentManager.getAliments());
+
+        // V2 : On récupère la réponse métier (controle métier)
         // Envoyer la liste d'aliments dans le Modèle
-        model.addAttribute("aliments", alimentManager.getAliments());
+        EniManagerResponse<List<Aliment>> response = alimentManagerV2.getAliments();
+
+        model.addAttribute("aliments", response.data);
 
         // Afficher la page
         // return "aliments-page";
@@ -48,18 +59,21 @@ public class DemoController {
     }
 
     @GetMapping("show-aliment/{id}")
-    public String showAliment(@PathVariable("id") long id, Model model){
-        // Récupérer l'aliment via la manager avec comme paramètre l'id provenant de la requête (URL)
-        Aliment aliment = alimentManager.getById(id);
+    public String showAliment(@PathVariable("id") Long id, Model model){
+        // V1: Récupérer l'aliment via la manager avec comme paramètre l'id provenant de la requête (URL)
+        //Aliment aliment = alimentManager.getById(id);
 
-        // Tester si l'aliment n'existe
-        if (aliment == null){
+        // V2: Récupérer l'aliment via la manager avec comme paramètre l'id provenant de la requête (URL)
+        EniManagerResponse<Aliment> response = alimentManagerV2.getById(id);
+
+        // Tester si l'aliment n'existe (controle métier)
+        if (response.code.equals("701")){
             // Afficher la page d'erreur qui s'appelle aliment-not-found
             return "aliment-not-found";
         }
 
         // Envoyer l'aliment trouvé dans la vue (dans le modèle)
-        model.addAttribute("aliment", aliment);
+        model.addAttribute("aliment", response.data);
 
         // Afficher la page detail aliment
         return "detail-aliment-page";

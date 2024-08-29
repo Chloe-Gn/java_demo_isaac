@@ -15,8 +15,12 @@ public class AlimentManager {
 
     /**
      * Le manager qui récupère la liste des Aliments
+     * @deprecated La méthode sera supprimée dans une version future
+     * Utilisez plutot la fonction {@link AlimentManagerV2#getAliments()}
+     *
      * @return
      */
+    @Deprecated
     public List<Aliment> getAliments() {
         // récupérer les aliments de la DAO
         List<Aliment> aliments = daoAliment.selectAliments();
