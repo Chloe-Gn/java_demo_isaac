@@ -1,4 +1,4 @@
-package eni.demo.demo.module4;
+package eni.demo.demo.module4.ihm;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

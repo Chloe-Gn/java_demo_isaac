@@ -1,4 +1,4 @@
-package eni.demo.demo;
+package eni.demo.demo.module4.bo;
 
 public class Personne {
 

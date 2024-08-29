@@ -1,10 +1,9 @@
 package eni.demo.demo.module4.dao;
 
-import eni.demo.demo.module4.Aliment;
+import eni.demo.demo.module4.bo.Aliment;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

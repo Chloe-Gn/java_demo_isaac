@@ -1,6 +1,6 @@
 package eni.demo.demo.module4.dao;
 
-import eni.demo.demo.module4.Aliment;
+import eni.demo.demo.module4.bo.Aliment;
 
 import java.util.List;
 

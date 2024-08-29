@@ -1,6 +1,5 @@
-package eni.demo.demo.module4;
+package eni.demo.demo.module4.bo;
 
-import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 

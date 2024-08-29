@@ -1,6 +1,6 @@
 package eni.demo.demo.module4.bll;
 
-import eni.demo.demo.module4.Aliment;
+import eni.demo.demo.module4.bo.Aliment;
 import eni.demo.demo.module4.dao.IDAOAliment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,12 +19,7 @@ public class AlimentManagerV2 {
         List<Aliment> aliments = daoAliment.selectAliments();
 
         // Cas 1 : Succès
-        EniManagerResponse<List<Aliment>> response = new EniManagerResponse<List<Aliment>>();
-        response.code = "200";
-        response.message = "Les aliments ont été récupérés avec succès";
-        response.data = aliments;
-
-        return response;
+        return EniManagerResponse.performResponse("200", "Les aliments ont été récupérés avec succès", aliments);
     }
 
     public EniManagerResponse<Aliment> getById(Long id) {
@@ -33,19 +28,10 @@ public class AlimentManagerV2 {
 
         // Cas 1 : Erreur 701
         if (aliment == null){
-            EniManagerResponse<Aliment> response = new EniManagerResponse<Aliment>();
-            response.code = "701";
-            response.message = "Impossible de récupérer un aliment inexistant";
-
-            return response;
+           return EniManagerResponse.performResponse("701", "Impossible de récupérer un aliment inexistant", null);
         }
 
         // Cas 2 : Succès
-        EniManagerResponse<Aliment> response = new EniManagerResponse<Aliment>();
-        response.code = "200";
-        response.message = "Les aliments ont été récupérés avec succès";
-        response.data = aliment;
-
-        return response;
+        return EniManagerResponse.performResponse("200", "L'aliment à été récupéré avec succès", aliment);
     }
 }

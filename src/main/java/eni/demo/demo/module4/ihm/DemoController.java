@@ -1,15 +1,15 @@
-package eni.demo.demo.module4;
+package eni.demo.demo.module4.ihm;
 
 import eni.demo.demo.module4.bll.AlimentManager;
 import eni.demo.demo.module4.bll.AlimentManagerV2;
 import eni.demo.demo.module4.bll.EniManagerResponse;
+import eni.demo.demo.module4.bo.Aliment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -45,6 +45,8 @@ public class DemoController {
     public String showAliments(Model model){
         // V1 : Envoyer la liste d'aliments dans le Modèle
         //model.addAttribute("aliments", alimentManager.getAliments());
+
+
 
         // V2 : On récupère la réponse métier (controle métier)
         // Envoyer la liste d'aliments dans le Modèle

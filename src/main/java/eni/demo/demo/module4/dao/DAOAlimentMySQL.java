@@ -1,6 +1,6 @@
 package eni.demo.demo.module4.dao;
 
-import eni.demo.demo.module4.Aliment;
+import eni.demo.demo.module4.bo.Aliment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;

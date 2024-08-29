@@ -1,9 +1,9 @@
-package eni.demo.demo.module4;
+package eni.demo.demo.module4.ihm;
 
 import eni.demo.demo.module4.bll.AlimentManager;
+import eni.demo.demo.module4.bo.Aliment;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.system.SystemProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

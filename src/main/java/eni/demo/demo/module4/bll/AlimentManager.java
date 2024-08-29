@@ -1,6 +1,6 @@
 package eni.demo.demo.module4.bll;
 
-import eni.demo.demo.module4.Aliment;
+import eni.demo.demo.module4.bo.Aliment;
 import eni.demo.demo.module4.dao.IDAOAliment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
