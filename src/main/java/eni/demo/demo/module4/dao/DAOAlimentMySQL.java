@@ -27,7 +27,7 @@ public class DAOAlimentMySQL implements IDAOAliment {
         public Aliment mapRow(ResultSet rs, int rowNum) throws SQLException {
             Aliment aliment = new Aliment();
 
-            aliment.id = rs.getInt("id");
+            aliment.id = rs.getLong("id");
             aliment.name = rs.getString("name");
 
             return aliment;

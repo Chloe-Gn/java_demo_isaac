@@ -1,11 +1,18 @@
 package eni.demo.demo.module4.bo;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+@Entity
 public class Aliment {
 
-    public long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long id;
 
     @NotBlank( message = "Le titre doit être renseigné")
     @Size(min=2, max=250, message = "Doit avoir au moins 2 caractères")
