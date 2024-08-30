@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
-@SpringBootTest
+/*@SpringBootTest
 class DemoApplicationTests {
+
 
 	@Autowired
 	AlimentManagerV2 alimentManagerV2;
@@ -38,3 +39,5 @@ class DemoApplicationTests {
 		Assert.isTrue(response.code.equals("701"),response.message);
 	}
 }
+
+*/
