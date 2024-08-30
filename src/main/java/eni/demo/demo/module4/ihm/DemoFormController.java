@@ -1,7 +1,8 @@
 package eni.demo.demo.module4.ihm;
 
-import eni.demo.demo.module4.bll.AlimentManager;
+
 import eni.demo.demo.module4.bo.Aliment;
+import eni.demo.demo.module4.bll.AlimentManager;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,33 +19,38 @@ public class DemoFormController {
     AlimentManager alimentManager;
 
     @GetMapping("show-aliment-form")
-    public String showAlimentForm(Model model) {
-        // Préparer ce que tu va envoyer dans le formulaire par défaut
-        Aliment aliment = new Aliment(-1L, "");
 
-        // Envoyer l'aliment dans le front (dans la réponse)
-        // pour le mettre dans le formulaire
+    public String showAlimentForm(Model model) {
+
+        Aliment aliment = new Aliment("", 1L);
+
         model.addAttribute("aliment", aliment);
 
-        // Afficher la page formulaire
         return "form/form-aliment-page";
     }
 
-    /**
-     * Traiter les données qui nous serons envoyé
-     * @return
+
+    /* Traiter les données qui nous seront envoyées.
+     *@return
      */
+
     @PostMapping("show-aliment-form")
     public String alimentForm(@Valid @ModelAttribute Aliment aliment, BindingResult bindingResult) {
-        // Objectif tester la validité de la donnée (controle de surface)
-        if (bindingResult.hasErrors()){
+
+        // Objectif tester la validité de la donnée (contrôle de surface)
+        if (bindingResult.hasErrors()) {
             System.out.println("Erreur de contrôle surface");
         }
 
-        // On sauvegarde l'aliment dans la BDD
+        //On sauvegarde l'aliment dans la BDD
         alimentManager.saveAliment(aliment);
 
-        // Afficher la page formulaire
         return "form/form-aliment-page";
+
     }
+
 }
+
+
+
+

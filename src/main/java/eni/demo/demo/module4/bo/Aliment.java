@@ -10,31 +10,45 @@ import jakarta.validation.constraints.Size;
 @Entity
 public class Aliment {
 
+    @NotBlank (message = "Le titre doit être renseigné")
+    @Size(min=2, max=250, message = "Doit avoir au moins deux caractères")
+    public String name;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    @NotBlank( message = "Le titre doit être renseigné")
-    @Size(min=2, max=250, message = "Doit avoir au moins 2 caractères")
-    public String name;
 
-    public Aliment() {
+    public Aliment(String name, long id) {
+        this.name = name;
+        this.id = id;
     }
 
-    public Aliment(long id, String name) {
-        this.id = id;
+    public Aliment() {
+
+    }
+
+    public Aliment (String name){
         this.name = name;
+    }
+
+
+    public String getName() {
+        return name;
     }
 
     public long getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
 
     public void setName(String name) {
         this.name = name;
     }
+
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
 }

@@ -15,31 +15,36 @@ public class AlimentManager {
 
     /**
      * Le manager qui récupère la liste des Aliments
-     * @deprecated La méthode sera supprimée dans une version future
-     * Utilisez plutot la fonction {@link AlimentManagerV2#getAliments()}
+     * @Deprecated La méthode sera supprimée dans une version future
+     * utilisez plutot cette fonction {@link AlimentManagerV2#getAliments()}
      *
      * @return
      */
-    @Deprecated
+    @Deprecated()
     public List<Aliment> getAliments() {
-        // récupérer les aliments de la DAO
+
+        //Récupérer les aliments de la DAO
         List<Aliment> aliments = daoAliment.selectAliments();
 
         return aliments;
     }
 
+
     public Aliment getById(long id) {
-        // récupérer un aliment via la DAO
-        Aliment aliment = daoAliment.selectAlimentById(id);
+
+        Aliment aliment = daoAliment.getAlimentById(id);
 
         return aliment;
+
     }
 
     /**
      * Appellera la DAO pour sauvegarder un Aliment
-     * @param aliment
      */
+
     public void saveAliment(Aliment aliment) {
-        daoAliment.save(aliment);
+
+            daoAliment.saveAliment(aliment);
     }
+
 }

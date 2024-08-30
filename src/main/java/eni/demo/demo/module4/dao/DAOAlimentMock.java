@@ -7,46 +7,59 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 import java.util.List;
 
-@Profile("mock")
+
 @Component
+@Profile("mock")
 public class DAOAlimentMock implements IDAOAliment {
 
-    // Initialiser une fausse liste d'aliments
     List<Aliment> aliments = Arrays.asList(
-            new Aliment(1, "Chocolatine"),
-            new Aliment(2, "Beurre Salé"));
+            new Aliment("Chocolatine", 1),
+            new Aliment("Beurre sale", 2));
+
 
     @Override
     public List<Aliment> selectAliments() {
 
+        // Initialiser une fausse liste d'aliments
+
         return aliments;
+
+
     }
 
     @Override
-    public Aliment selectAlimentById(long id) {
-        // Le code pour récuperer l'aliment selon l'id
-        /*
-        Aliment alimentToFound = null;
-        for (Aliment aliment : aliments){
-            if (aliment.id == id){
-                alimentToFound = aliment;
-                break;
-            }
-        }
-        */
+    public Aliment getAlimentById(long id) {
 
-        // Filtrer avec un Predicate
-        // .stream => possibilité d'etendre la manipulation de la liste
-        // .filter => retourne les elements filtrés (qui respecte la condition)
-        // .findFirst => car je veux forcer à avoir/retourner qu'un seul element
-        // .get() => comme c'est nullable (Optionnal) je pars du principe qu'il n'est pas null pour l'instant
-        Aliment alimentToFound = aliments.stream().filter(aliment -> aliment.id == id).findFirst().orElse(null);
+        //Méthode à la mano quand on ne sait pas faire autrement
+//        Aliment alimentToFind = null;
+//        for (Aliment aliment : aliments){
+//            if (aliment.id == id) {
+//                alimentToFind = aliment;
+//                break;
+//            }
+//        }
 
-        return alimentToFound;
+        // Avec un predicate
+        // Le x, c'est l'aliment qu'on teste ci dessous
+        // on a besoin d'ajouter un findFirst car sinon on a une liste
+        // Le find first force le filter à ne récupérer qu'une instance
+        // et pas une liste avec une instance
+
+
+        // on fait ça car on est sur un Mock. On ne fera pas ça quand on aura une
+        // vraie BDD.
+        // un filter retourne les éléments filtrés qui respectent les conditions
+
+        Aliment alimentToFind = aliments.stream().filter(x -> x.id == id).findFirst().orElse(null);
+
+
+        // Le code pour récupérer un aliment par son id
+        return alimentToFind;
     }
 
     @Override
-    public void save(Aliment aliment) {
-        // TODO
+    public void saveAliment(Aliment aliment) {
+
     }
+
 }
