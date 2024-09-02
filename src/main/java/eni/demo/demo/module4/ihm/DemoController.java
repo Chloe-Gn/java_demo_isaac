@@ -14,10 +14,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class DemoController {
 
     @Autowired
-    AlimentManager alimentManager;
+   AlimentManager alimentManager;
 
     @Autowired
     AlimentManagerV2 alimentManagerV2;
+
+
+    @GetMapping("")
+    public String home(){
+        return "index";
+    }
+
 
     @GetMapping("chocolatine")
     public String chocolatine() {
@@ -90,6 +97,26 @@ public class DemoController {
 
         return "detail-aliment-page";
     }
+
+    @GetMapping("demo-debug")
+    public String showDemoDebug() {
+
+//        String pseudo1 = "Isaac";
+//        String pseudo2 = "SacréSacré";
+//
+//        pseudo1 = pseudo2;
+//        pseudo1 = "Pas 16h30. :'( sniff. Bilan module va piquer pour la peine";
+
+        Aliment a1 = new Aliment("Chocolatine",1l);
+        Aliment a2 = new Aliment( "Pain au chocolat",2l);
+
+        a1 = a2;
+
+        a1.name = "Pizza Ananas Nutella Crevette";
+
+        return "todo";
+    }
+
 
 
 }

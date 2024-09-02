@@ -20,7 +20,7 @@
 
     <h1>Formulaire Aliment</h1>
 
-    <form th:object="${aliment}" method="post" action="/show-aliment-form">
+    <form th:object="${aliment}" method="post" th:action="@{/show-aliment-form}">
 
 
         <input th:field="*{id}" type="hidden">

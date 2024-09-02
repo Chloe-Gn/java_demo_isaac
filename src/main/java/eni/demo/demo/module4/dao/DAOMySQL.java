@@ -56,7 +56,9 @@ public class DAOMySQL implements IDAOAliment {
 
         //Tester s'il existe en base, si OUI => Update, si NON => Insert
 
-        if (getAlimentById(aliment.id) != null) {
+       if (aliment.getId() !=null && getAlimentById(aliment.id) !=null)
+
+        {
 
             jdbcTemplate.update("UPDATE aliments SET name = ? WHERE id = ?", aliment.name, aliment.id);
 
