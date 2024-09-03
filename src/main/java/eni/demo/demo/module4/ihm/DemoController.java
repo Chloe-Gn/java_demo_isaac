@@ -43,7 +43,7 @@ public class DemoController {
         // Retourne le nom du fichier HTML à charger
         // PS: A partir du dossier resources/templates
         // resources/templates est la racine des fichiers HTML
-        return "login-page";
+        return "/login-page";
     }
 
     @GetMapping("show-aliments")

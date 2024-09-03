@@ -6,8 +6,23 @@
 </head>
 <body>
 
-    <h1>Coucou Beurre Doux ssdsd</h1>
+<header>
+    <div sec:authorize="isAuthenticated">
+        Logged user: <span sec:authentication="name"></span>
+        Roles: <span sec:authentication="principal.authorities"></span>
+    </div>
+    <nav>
+        <ul>
+            <li sec:authorize="!isAuthenticated"><a th:href="@{/login}">Connexion</a></li>
+            <li sec:authorize="isAuthenticated"><a th:href="@{/logout}">Déconnexion</a></li>
+            <li sec:authorize="hasRole('ROLE_FORMATEUR')"><a th:href="@{/show-aliments}">Aliments</a></li>
+            <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/make-basket}">Mon panier</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <p>Croissant au chocolatQSqsQSqsQS</p>
+<h1>Coucou Beurre Doux ssdsd</h1>
+
+<p>Croissant au chocolatQSqsQSqsQS</p>
 </body>
 </html>

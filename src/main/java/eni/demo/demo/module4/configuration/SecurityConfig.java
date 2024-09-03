@@ -16,6 +16,9 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.logout.HeaderWriterLogoutHandler;
+import org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -57,7 +60,9 @@ public class SecurityConfig {
         jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("SELECT pseudo, role FROM roles WHERE pseudo=?");
 
         return jdbcUserDetailsManager;
-    };
+    }
+
+    ;
 
 
     @Bean
@@ -67,9 +72,9 @@ public class SecurityConfig {
                         .requestMatchers("/chocolatine").hasAuthority("ROLE_EMPLOYE")
                         .requestMatchers("/show-aliments").hasAuthority("ROLE_FORMATEUR")
                         .requestMatchers("/show-aliment/**").hasAuthority("ROLE_FORMATEUR")
-                        .requestMatchers("/demo-debug").hasAnyAuthority("ROLE_FORMATEUR","ROLE_EMPLOYE","ROLE_ADMIN")
-                        .requestMatchers(HttpMethod.GET,"/show-aliment-form").hasAnyAuthority("ROLE_FORMATEUR","ROLE_EMPLOYE")
-                        .requestMatchers(HttpMethod.POST,"/show-aliment-form").hasAnyAuthority("ROLE_FORMATEUR","ROLE_EMPLOYE")
+                        .requestMatchers("/demo-debug").hasAnyAuthority("ROLE_FORMATEUR", "ROLE_EMPLOYE", "ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/show-aliment-form").hasAnyAuthority("ROLE_FORMATEUR", "ROLE_EMPLOYE")
+                        .requestMatchers(HttpMethod.POST, "/show-aliment-form").hasAnyAuthority("ROLE_FORMATEUR", "ROLE_EMPLOYE")
                         .requestMatchers("/make-basket").hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/show-basket-2").hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/clear-basket").hasAuthority("ROLE_ADMIN")
@@ -77,20 +82,29 @@ public class SecurityConfig {
                         .requestMatchers("/logout").authenticated()
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/vendor/**").permitAll()
+                        .requestMatchers("/css/**").permitAll()
+                        .requestMatchers("/images/**").permitAll()
+
 
                         .anyRequest().denyAll());
 
-
-                        http.formLogin(Customizer.withDefaults());
-
+// http.formLogin(Customizer.withDefaults());
 
 
+        HeaderWriterLogoutHandler clearSiteData = new HeaderWriterLogoutHandler(new ClearSiteDataHeaderWriter(ClearSiteDataHeaderWriter.Directive.ALL));
 
+
+        http.formLogin(form ->
+                form.loginPage("/login")
+                        .defaultSuccessUrl("/"));
+
+
+        http.logout((logout) -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+                .logoutSuccessUrl("/login?logout")
+                .addLogoutHandler(clearSiteData));
 
         return http.build();
     }
-
-
 
 
 }
