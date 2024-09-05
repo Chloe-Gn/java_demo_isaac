@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
@@ -13,10 +15,13 @@ import java.util.List;
 
 @Component
 @Profile("mysql")
-public class DAOMySQL implements IDAOAliment {
+public class DAOAlimentMySQL implements IDAOAliment {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     // ci dessous, RowMapper<Aliment>, c'est la généricité. Ce n'est pas une liste.
     static final RowMapper<Aliment> ALIMENT_ROW_MAPPER = new RowMapper<Aliment>() {
@@ -66,8 +71,15 @@ public class DAOMySQL implements IDAOAliment {
             return;
         }
 
+        String sql = "INSERT INTO aliments(id, name, id_category) VALUES (:idAliment,:nameAliment,:idCat)";
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        mapSqlParameterSource.addValue("idAliment", aliment.getId());
+        mapSqlParameterSource.addValue("nameAliment", aliment.getName());
+        mapSqlParameterSource.addValue("idCat",aliment.getCategory().getId());
 
-        jdbcTemplate.update("INSERT INTO aliments(id, name) VALUES (?,?)", aliment.id, aliment.name);
+
+        namedParameterJdbcTemplate.update(sql, mapSqlParameterSource);
+
 
     }
 
