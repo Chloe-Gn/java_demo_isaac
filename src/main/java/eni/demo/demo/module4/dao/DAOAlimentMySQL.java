@@ -24,7 +24,9 @@ public class DAOAlimentMySQL implements IDAOAliment {
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     // ci dessous, RowMapper<Aliment>, c'est la généricité. Ce n'est pas une liste.
+
     static final RowMapper<Aliment> ALIMENT_ROW_MAPPER = new RowMapper<Aliment>() {
+
         @Override
         public Aliment mapRow(ResultSet rs, int rowNum) throws SQLException {
             Aliment aliment = new Aliment();
